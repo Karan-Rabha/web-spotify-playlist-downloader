@@ -99,7 +99,7 @@ def spotify_playlist_info(playlist_link):
         return search_result
     elif url_check_result == "Playlist":
         playlist = sp.playlist(playlist_uri)
-        playlist_name = playlist['name'].strip() # remove blank spaces
+        playlist_name = playlist['name'].strip()  # remove blank spaces
 
         for item in playlist["tracks"]["items"]:
             song_name = item["track"]["name"]

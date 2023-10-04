@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, send_file, jsonify
 from app import spotify_playlist_info, download_song
+from file_manager import create_zip_file
 import concurrent.futures
 import ast
 import os
@@ -20,7 +21,7 @@ def generate():
     vi_lst = [{"video_id": '_fgXpX1vEQA', "playlist_name": 'tsting', "song_name": 'Hey Stupid, I Love You'},
               {"video_id": 'GkPuGN38jJs', "playlist_name": 'tsting', "song_name": 'I Still Wait For You'}]
 
-    return render_template("index.html", songs=vi_lst)
+    return render_template("index.html", songs=playlist_data)
 
 
 @app.route('/download', methods=['POST'])
@@ -44,6 +45,11 @@ def download():
             futures = [executor.submit(download_song, song, DOWNLOAD_PATH) for song in parsed_song_data]
         # Wait for all tasks to complete
         concurrent.futures.wait(futures)
+
+        filename = parsed_song_data[0]["playlist_name"]
+        file_path = os.path.join(DOWNLOAD_PATH, filename)
+        create_zip_file(file_path, filename)
+
         return jsonify(data)
     else:
         # pass the song data over to download song
