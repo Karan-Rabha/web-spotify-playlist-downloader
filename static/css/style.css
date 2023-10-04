@@ -1,0 +1,109 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.form-box {
+    margin: 2rem 0;
+}
+
+#url {
+    padding: 1rem 0.5rem;
+    width: 30rem;
+    text-align: center;
+    font-size: medium;
+    border-radius: 20px;
+    border: 1px solid #9d9797;
+    background-color: #f8f8f8;
+    margin-right: 1rem;
+}
+
+#url:focus {
+    border: 1px solid #6d6969;
+    outline: none;
+}
+
+.box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin: 0.8rem 0;
+    width: 35rem;
+    background-color: #c9e5d047;
+    font-family: 'Ubuntu', sans-serif;
+}
+
+.box-container {
+    margin: 0 2rem;
+}
+
+.btn {
+    height: 2.7rem;
+    width: 7.5rem;
+    font-size: 0.9rem;
+    border-radius: 6px;
+    background-color: #95a0ea73;
+    border-width: 1px;
+    border-color: #0802ff;
+    cursor: pointer;
+}
+
+.gen-btn {
+    height: 3.5rem;
+    width: 10rem;
+    font-size: medium;
+    background-color: #4c9ce0;
+}
+
+/* change button color on click */
+/*.download-button:active {
+    background-color: red;
+}*/
+
+/* delete this if not required currently not using .cancel-button */
+.cancel-button {
+    display: none;
+}
+
+.save-button {
+    display: none;
+}
+
+.searching {
+    display: none;
+    height: 30px;
+    width: 30px;
+    border-width: 6px;
+    border-top: 6px;
+}
+
+.downloading {
+    display: none;
+    height: 20px;
+    width: 20px;
+    border-width: 4px;
+    border-top: 4px;
+}
+
+.loader {
+    border-style: solid;
+    border-color: #10569d;
+    border-top-color: white;
+    border-radius: 50%;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% {transform: rotate(0deg);}
+    100% {transform: rotate(360deg);}
+}
