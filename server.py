@@ -37,8 +37,6 @@ def download():
     # Use ast.literal_eval to safely evaluate the string as a Python literal
     parsed_song_data = ast.literal_eval(raw_song_data)
 
-    # return jsonify(data)
-
     # check if song data is a list or dict
     if type(parsed_song_data) == list:
         with concurrent.futures.ThreadPoolExecutor() as executor:

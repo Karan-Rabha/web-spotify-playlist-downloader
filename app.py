@@ -1,6 +1,7 @@
 import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
-from pytube import YouTube, Search
+from pytube import YouTube
+from youtubesearchpython import VideosSearch
 import os
 import re
 import concurrent.futures
@@ -47,9 +48,9 @@ def search_song(song_info):
     else:
         playlist_name = "Track"
     try:
-        search_results = Search(f"{song_name} {artist}")
+        search_results = VideosSearch(f"{song_name} {artist}", limit=1).result()
         if search_results:
-            video_id_result = search_results.results[0].video_id
+            video_id_result = search_results["result"][0]["id"]
             return {
                 'video_id': video_id_result,
                 'playlist_name': playlist_name,
@@ -100,6 +101,7 @@ def spotify_playlist_info(playlist_link):
     elif url_check_result == "Playlist":
         playlist = sp.playlist(playlist_uri)
         playlist_name = playlist['name'].strip()  # remove blank spaces
+        playlist_image = playlist["images"][0]["url"]
 
         for item in playlist["tracks"]["items"]:
             song_name = item["track"]["name"]
@@ -109,7 +111,8 @@ def spotify_playlist_info(playlist_link):
                 filtered_song_list.append({
                     'song_name': song_name,
                     'artist': artist,
-                    'playlist_name': playlist_name
+                    'playlist_name': playlist_name,
+                    'playlist_image': playlist_image
                 })
 
         with concurrent.futures.ThreadPoolExecutor() as executor:
